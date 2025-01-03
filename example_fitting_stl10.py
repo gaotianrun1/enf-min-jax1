@@ -137,7 +137,8 @@ def main():
         enf_grads, enf_opt_state = enf_optimizer.update(grads[0], enf_opt_state)
         enf_params = optax.apply_updates(enf_params, enf_grads)
 
-        # Update the meta SGD parameters
+        # Update the meta SGD parameters 
+        # 外循环不仅在更新 ENF 的主干参数，还在更新内循环的超参数（这里是“学习率”）
         meta_sgd_grads, meta_sgd_opt_state = meta_sgd_optimizer.update(grads[1], meta_sgd_opt_state)
         meta_sgd_params = optax.apply_updates(meta_sgd_params, meta_sgd_grads)
 
